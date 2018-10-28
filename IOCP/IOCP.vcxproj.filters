@@ -27,6 +27,9 @@
     <ClInclude Include="IOCP.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="XhqSocket.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="XhqSocket.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

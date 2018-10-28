@@ -66,9 +66,41 @@ BOOL CIOCP::AssociateDeviceObjWithPortObj(HANDLE hDevice, ULONG_PTR CompKey)
 // 函数参数:  OVERLAPPED * pOverlapped
 // 注意事项: 
 //************************************************************************
-BOOL CIOCP::PostQueuedIoCompletionStatus(ULONG_PTR CompletionKey, DWORD dwNumBytes /*= 0*/, OVERLAPPED* pOverlapped /*= NULL*/)
+BOOL CIOCP::PostQueuedIoCompletionStatus(ULONG_PTR CompletionKey, 
+                                         DWORD dwNumBytes /*= 0*/, 
+                                         OVERLAPPED* pOverlapped /*= NULL*/)
 {
   BOOL bRet = FALSE;
-  bRet = PostQueuedCompletionStatus(m_hIoCompletionPortObj, dwNumBytes, CompletionKey, pOverlapped);
+  bRet = PostQueuedCompletionStatus(m_hIoCompletionPortObj, 
+                                    dwNumBytes, 
+                                    CompletionKey, 
+                                    pOverlapped);
   return bRet;
+}
+
+
+
+//************************************************************************
+// 函数名称: CIOCP::GetQueuedIoCompletionStatus
+// 访问权限: public 
+// 函数功能: 从完成端口获取一个已经完成的IO请求
+// 返回值:   BOOL
+// 参数:     LPDWORD lpNumberOfBytesTransferred
+// 参数:     PULONG_PTR lpCompletionKey
+// 参数:     LPOVERLAPPED * lpOverlapped
+// 参数:     DWORD dwMilliseconds
+// 注意:     
+//************************************************************************
+BOOL CIOCP::GetQueuedIoCompletionStatus(LPDWORD lpNumberOfBytesTransferred, 
+                                        PULONG_PTR lpCompletionKey,
+                                        LPOVERLAPPED * lpOverlapped, 
+                                        DWORD dwMilliseconds)
+{
+  BOOL bRet = FALSE;
+  bRet = ::GetQueuedCompletionStatus(m_hIoCompletionPortObj,
+                                     lpNumberOfBytesTransferred,
+                                     lpCompletionKey,
+                                     lpOverlapped, dwMilliseconds);
+
+
 }
