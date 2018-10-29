@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "IOCP.h"
 #include "XhqSocket.h"
+
+
 int _tmain(int argc, _TCHAR* argv[])
 {
   CXhqSocket::StartUp(2, 2);
@@ -18,7 +20,7 @@ int _tmain(int argc, _TCHAR* argv[])
   int nRet = ::bind(server, (sockaddr*)&skAddr, sizeof(skAddr));
 	
   BOOL bRet = Iocp.AssociateDeviceObjWithPortObj((HANDLE)server);
-  nRet = ::listen(server, 200);
+
   
   LPFN_ACCEPTEX lpAcceptEx = NULL;
   GUID GuidAccpetEx = WSAID_ACCEPTEX;
@@ -31,6 +33,23 @@ int _tmain(int argc, _TCHAR* argv[])
                   &dwRetBytes,
                   NULL,
                   NULL);
+
+  if (nRet != 0)
+  {
+    return -1;
+  }
+
+  nRet = ::listen(server, 200);
+
+  bool bIsReciveConnect = true;
+  while (true)
+  {
+    if (bIsReciveConnect)
+    {
+      lpAcceptEx(server,)
+    }
+  }
+
   CXhqSocket::CleanUp();
 
   return 0;
