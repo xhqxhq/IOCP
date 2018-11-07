@@ -75,8 +75,25 @@ int _tmain(int argc, _TCHAR* argv[])
         if (!bRet)
         {
             printf("AccpetEx Failed Error Code:[%d]", GetLastError());
+            delete pNewClient;
         }
+        lstClient.push_back(pNewClient);
+        bIsReciveConnect = false;
     }
+
+    DWORD dwNumberOfBytesTransferd = 0;
+    MYOVERLAPPED* tmpOverLapped = NULL;;
+    ZeroMemory(&tmpOverLapped, sizeof(MYOVERLAPPED));
+    bRet = Iocp.GetQueuedIoCompletionStatus(&dwNumberOfBytesTransferd, NULL, (LPOVERLAPPED*)&tmpOverLapped, INFINITE);
+    if (!bRet)
+    {
+        continue;
+    }
+
+
+
+
+
   }
 
   CXhqSocket::CleanUp();
